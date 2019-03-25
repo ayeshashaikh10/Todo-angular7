@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="card">
+    <div class="row">
+      <div class="col-lg-12">
+        <h4 class="todoHeading">My To Do List</h4>
+      </div>
+    </div>
+    <div class="card-body">
+    <div class="row">
+      <div class="col-lg-4">
+          <input type="text" id="title"  placeholder="Enter todo item" 
+          [(ngModel)] = "todoItem.name" class="form-control" 
+          required #title="ngModel" name="title"/>  
+      </div>
+      <div class="col-lg-4">
+          <button (click)="addTodoList(todoItem.name)" class="btn btn-primary"
+          [disabled]="!title.value"> Add </button>
+      </div>
+    </div>
+    <br/>
+    <div class="row"> 
+      <div class="col-lg-5">      
+        <div class="card" *ngIf="this.todoList.length==0? false:true">
+          <div class="card-header">
+            <h4 >To Do Pending</h4>
+          </div>
+        <!-- <div class="card-body"> -->
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" *ngFor='let item of todoList'>
+                <div class="row">          
+                <div class="col-lg-10">
+                  <input type="checkbox" [(ngModel)]='item.done' />
+                  <label class="done-{{item.done}}">{{item.name}}  </label>
+                </div>            
+                <div class="col-lg-2">                
+                  <button class="btn btn-default" (click)='deleteTodo(item)' id="btnRemove">
+                    <i class="fa fa-remove" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </div>                    
+              </li>
+            </ul>           
+            <div class="card-footer" *ngIf="this.todoList.length==0?  false:true"> 
+              <button class="btn btn-primary" (click)='deleteAll()' >Delete All</button>
+            </div>             
+        </div>
+        <!-- <div class="card">
+          <div class="card-header">
+              <h4 >To Do Done</h4>
+          </div>
+          <div class="card-body"> 
+            <ul class="list-group">
+              <li class="list-group-item" *ngFor='let item of todoDone'>
+                {{item.name}}        
+              </li>
+            </ul>
+          </div>
+          <div class="card-footer"> 
+            <button class="btn btn-primary" (click)='deleteAllDone()'>Delete All</button>
+          </div>
+        </div>-->
+      </div>
+    </div>
+  </div>
+</div>
+</div> 
+   
