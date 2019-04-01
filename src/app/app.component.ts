@@ -6,5 +6,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'my-todo';
+  title = 'sidebar-app';
+  myDateValue: Date;
+
+  ngOnInit() {
+    this.myDateValue = new Date();
+  }
+
+  customAction() {
+    alert("Some custom action");
+  }
 }
