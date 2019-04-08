@@ -53,7 +53,7 @@ export class EditTodoComponent implements OnInit , OnChanges {
   }
 
   ngOnChanges(){ 
-  debugger;
+  
     this.todoList = this.data.getTodoData();  
     this.subTaskData=this.data.getSubTask();
     this.editTaskData = this.data.getEditData();
@@ -87,7 +87,7 @@ export class EditTodoComponent implements OnInit , OnChanges {
   }
 
   addSubTask(){ 
-    debugger;
+    
     this.subTaskList = this.data.getSubTask();
 
     if(this.subTaskList.length == 0){
