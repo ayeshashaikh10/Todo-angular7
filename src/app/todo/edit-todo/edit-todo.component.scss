@@ -1,0 +1,36 @@
+@import "../add-todo/add-todo.component.scss";
+:card-bg-color{
+    --card-bg-color:#fff;
+}
+:pane-box-shadow{
+    --pane-box-shadow: 0 0 5px 0 grey
+}
+
+:text-color{
+    --text-color: red;
+}
+
+.PaneButton{
+    height: 70px;
+    display: block;
+    overflow: hidden;
+    // font-size: var(--xs-font-size);
+    // margin-bottom: calc(var(--gutter)/2);
+    background-image: none;
+    background-color: var(--card-bg-color);
+    border: thin solid lightgrey;
+    border-radius: 5px;
+    box-shadow: 0 0 6px 0 lightgrey;
+    // color: grey;
+    transition:  cubic-bezier(0.39, 0.575, 0.565, 1);
+    width:80%;
+    font-size: small
+}
+.PaneButton:hover{
+    box-shadow:  0 0 7px 0 grey
+}
+
+.fa-check{
+    color: green;
+}
+

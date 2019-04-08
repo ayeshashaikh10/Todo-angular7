@@ -5,18 +5,34 @@ import { TodoListComponent } from './todo-list/todo-list.component';
 import { TodoDoneComponent } from './todo-done/todo-done.component';
 import { TodoRoutingModule} from './todo-routing.module';
 import { BsDatepickerModule} from 'ngx-bootstrap';
-import { TooltipModule } from 'angular-bootstrap-md'
+import { TooltipModule } from 'angular-bootstrap-md';
+import { EditTodoComponent } from './edit-todo/edit-todo.component';
+import { AddTodoComponent } from './add-todo/add-todo.component';
+import { PersonalTodoComponent } from './personal-todo/personal-todo.component';
+import { WorkTodoComponent } from './work-todo/work-todo.component'
+import { IgxTimePickerModule} from "igniteui-angular";
+
 
 
 
 @NgModule({
-  declarations: [ TodoListComponent, TodoDoneComponent],
+  declarations: [
+    TodoListComponent, 
+    TodoDoneComponent, 
+    EditTodoComponent, 
+    AddTodoComponent, 
+    PersonalTodoComponent,
+    WorkTodoComponent,
+    
+  ],
+
   imports: [
     CommonModule,
     TodoRoutingModule,
     FormsModule,
     BsDatepickerModule.forRoot(),    
-    TooltipModule.forRoot()
+    TooltipModule.forRoot(),
+    IgxTimePickerModule  
   ]
 })
 export class TodoModule { }

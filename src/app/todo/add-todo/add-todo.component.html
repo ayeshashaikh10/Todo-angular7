@@ -1,0 +1,105 @@
+
+<div class="card"  >
+                <!-- *ngIf="this.todoData.length" -->
+  <div class="card-header">
+    <div class="row">
+      <div class="col-lg-10"><h4 >My List</h4></div>
+      <div class="col-lg-2">
+        <span id="btnAdd" (click)="showAddTask()" mdbTooltip="Add Task"><i  class="fa fa-plus-circle fa-lg"></i></span>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="row" *ngIf="this.toggleAddTask">
+      <div class="col-lg-5">
+        <div class="md-form">
+          <input mdbInput type="text" id="title" class="form-control" placeholder="I want to..."
+            [(ngModel)] = "todoItem.name" required #title="ngModel" name="title">
+        </div>
+      </div>
+      <div class="col-lg-4" >
+        <div class="md-form">
+          <input mdbInput type="text" name="taskdate" class="form-control" [minDate]="this.minDate"
+            [maxDate]="maxDate" #dp="bsDatepicker"
+            bsDatepicker [(bsValue)]="taskDate" placeholder="Select date"
+            [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
+        </div>
+      </div>
+      <div class="col-lg-1">
+        <div class="md-form">
+          <button type="button" (click)="addTodoList(todoItem.name)" class="btn btn-primary btn-sm"
+          [disabled]="!title.value"> Add </button>
+        </div>
+      </div>
+      <br/>
+    </div>
+  
+    <div>
+        <h5>Today</h5>
+        <br/>
+        <div *ngIf="this.todayList.length; else noTaskMsg">
+          <ul class="list-group" >
+            <li *ngFor='let item of todayList '>                    
+              <div class="row">
+                <div class="col-lg-9">
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="todoCheck_{{item.id}}"
+                      [(ngModel)]='item.done' mdbInputDirective mdbTooltip="Check task to done" />
+                    <label class="form-check-label done-{{item.done}}" for="todoCheck_{{item.id}}">{{item.name}}</label>
+                  </div>
+                </div>
+                <div class="col-lg-1">
+                  <a mdbTooltip="Edit Task" (click)="editTask(item)"><i class=" fa fa-pencil fa-lg"></i></a>
+                </div>
+                <div class="col-lg-2">                      
+                  <span mdbTooltip="Delete Task"><i class="fa fa-remove fa-lg" aria-hidden="true" (click)='deleteTodo(item)'></i></span>
+                </div>
+              </div>
+              <br/>        
+            </li>
+          </ul>
+          <div>
+            <button class="btn btn-primary btn-md" name="today" (click)='deleteAll($event)' >Delete All</button>
+          </div>
+        </div>
+        
+      
+      <hr>
+      
+        <h5>Tomorrow</h5>
+        <br/>
+        <div *ngIf="this.upcomingList.length; else noTaskMsg">
+            <ul class="list-group" >
+              <li *ngFor='let item of upcomingList '>                    
+                <div class="row">
+                  <div class="col-lg-9">
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input" id="todoCheck_{{item.id}}"
+                        [(ngModel)]='item.done' mdbInputDirective mdbTooltip="Check task to done" />
+                      <label class="form-check-label done-{{item.done}}" for="todoCheck_{{item.id}}">{{item.name}}</label>
+                    </div>
+                  </div>
+                  <div class="col-lg-1">
+                    <a mdbTooltip="Edit Task" (click)="editTask(item)"><i class=" fa fa-pencil fa-lg"></i></a>
+                  </div>
+                  <div class="col-lg-2">                      
+                    <span mdbTooltip="Delete Task"><i class="fa fa-remove fa-lg" aria-hidden="true" (click)='deleteTodo(item)'></i></span>
+                  </div>
+                </div>
+                <br/>        
+              </li>
+            </ul>
+            <div>
+              <button class="btn btn-primary btn-md" name="today" (click)='deleteAll($event)' >Delete All</button>
+            </div>
+        </div>
+        <ng-template #noTaskMsg>
+          <p>No pending tasks</p>
+        </ng-template>
+    </div>
+          
+        
+  </div>
+</div>
+  
+  

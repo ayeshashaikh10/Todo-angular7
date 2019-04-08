@@ -7,6 +7,10 @@ export class TodoService {
 
   private tododata:any = [];
   private todoDonedata:any = [];
+  private todoEditData:any = [];
+  private todoSubTask:any=[];
+  private taskNote:any=[];
+
   setTodoData(data:any){
     this.tododata=data;
   }
@@ -18,6 +22,26 @@ export class TodoService {
   }
   getTodoDoneData():any{
     return this.todoDonedata;
+  }
+  setEditData(data:any){
+    this.todoEditData = data; 
+  }
+  getEditData():any{
+    return this.todoEditData;
+  }
+  setSubTask(data:any){
+    this.todoSubTask = data;
+  }
+  getSubTask():any{
+    return this.todoSubTask;
+  }
+
+  setTaskNote(data:any){
+    this.taskNote = data;
+  }
+
+  getTaskNote():any{
+    return this.taskNote;
   }
 
 }

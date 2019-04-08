@@ -1,0 +1,32 @@
+
+// @import '../add-todo/add-todo.component.scss';
+
+i{
+    cursor: pointer;
+}
+
+.done-true{
+    text-decoration: line-through;
+    color: grey;
+}
+.fa-remove{
+    color: red;
+}
+
+.done-true{
+    text-decoration: line-through;
+    color: grey;
+}
+
+#btnRemove i{
+    color: red;
+    font-size: 20px;
+}
+
+.todoHeading{
+    text-align: center;
+}
+
+ul{
+    list-style-type: none;
+}

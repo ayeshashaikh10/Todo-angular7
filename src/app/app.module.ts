@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from "@angular/forms";
 
 import { AppRoutingModule } from './app-routing.module';
@@ -10,12 +10,11 @@ import { ExpandMenuDirective } from './sidebar/expand-menu.directive';
 import { HomeComponent } from './home/home.component';
 import { TodoModule } from './todo/todo.module';
 import { TodoRoutingModule } from './todo/todo-routing.module';
-import { BsDatepickerModule} from 'ngx-bootstrap';
+import { BsDatepickerModule, TimepickerComponent} from 'ngx-bootstrap';
 import { DatePickerComponent } from './date-picker/date-picker.component';
 import { InputsModule, CheckboxModule, ButtonsModule, TooltipModule } from 'angular-bootstrap-md'
-
-
-
+import { IgxTimePickerModule } from "igniteui-angular";
+import { TimePickerComponent } from './time-picker/time-picker.component';
 
 @NgModule({
   declarations: [
@@ -24,8 +23,17 @@ import { InputsModule, CheckboxModule, ButtonsModule, TooltipModule } from 'angu
     SidebarDirective,
     ExpandMenuDirective,
     HomeComponent,
-    DatePickerComponent      
+    DatePickerComponent,
+    TimePickerComponent ,
+         
   ],
+  schemas:[
+    CUSTOM_ELEMENTS_SCHEMA
+  ],
+  // exports:[
+  //   TimePickerComponent
+  // ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -36,8 +44,8 @@ import { InputsModule, CheckboxModule, ButtonsModule, TooltipModule } from 'angu
     InputsModule.forRoot(),
     CheckboxModule,
     ButtonsModule.forRoot(),
-    TooltipModule.forRoot()
-
+    TooltipModule.forRoot(),
+    IgxTimePickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
