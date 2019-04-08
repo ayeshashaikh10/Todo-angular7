@@ -11,6 +11,7 @@ export class PersonalTodoComponent implements OnInit {
   constructor(private data:TodoService ){}
   editTaskData=[];
   todoType="personal"
+  todoData=[];
   ngOnInit(){
         
   } 
@@ -23,6 +24,11 @@ export class PersonalTodoComponent implements OnInit {
     this.editTaskData=$event;
     this.editTaskData = this.data.getEditData();
     
+  }
+
+  sendUpdatedData($event){
+    this.todoData = $event;
+    // this.todoData = this.get
   }
 
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, ViewContainerRef, ViewChild, TemplateRef, Input } from '@angular/core';
+import { Component, OnInit, OnChanges, ViewContainerRef, ViewChild, TemplateRef, Input, Output ,EventEmitter } from '@angular/core';
 import { subTodo } from "../todo";
 import { TodoService} from '../todo-service.service';
 import { NONE_TYPE } from '@angular/compiler/src/output/output_ast';
@@ -31,7 +31,10 @@ export class EditTodoComponent implements OnInit , OnChanges {
   @Input () editTaskData =[];
   @Input() todoType:string;  
 
-  prev_todType= this.todoType;
+  @Output() todoData = new EventEmitter<any>();
+
+  prev_link= '';
+  showEditTask = false;
   
   subTaskItem: subTodo={
     subTaskId :0,
@@ -45,11 +48,12 @@ export class EditTodoComponent implements OnInit , OnChanges {
   constructor(private data:TodoService ){}
 
   ngOnInit() {
-  this.taskType= this.todoType;
-  this.todoList = this.data.getTodoData();
+    this.taskType= this.todoType;
+    this.todoList = this.data.getTodoData();    
   }
 
   ngOnChanges(){ 
+  debugger;
     this.todoList = this.data.getTodoData();  
     this.subTaskData=this.data.getSubTask();
     this.editTaskData = this.data.getEditData();
@@ -57,6 +61,7 @@ export class EditTodoComponent implements OnInit , OnChanges {
     if(this.subTaskData){
       this.subTaskList = this.subTaskData;
     }
+
     this.subTaskList = this.subTaskList.filter(item=>{
       return this.editTaskData[0].taskId ==  item.taskId
     })
@@ -68,9 +73,23 @@ export class EditTodoComponent implements OnInit , OnChanges {
       })
       this.note = this.taskNoteObj ? this.taskNoteObj.note :''    
     }    
+    
+    if(this.editTaskData.length){
+      this.prev_link = this.data.getPrevLink();
+      if(this.prev_link == this.todoType){
+        this.showEditTask = true;
+      }
+      else{
+        this.showEditTask = false;
+        this.data.setPrevLink(this.todoType)
+      }
+    }
   }
 
-  addSubTask(){
+  addSubTask(){ 
+    debugger;
+    this.subTaskList = this.data.getSubTask();
+
     if(this.subTaskList.length == 0){
       this.subTaskList.push(
         {
@@ -96,6 +115,10 @@ export class EditTodoComponent implements OnInit , OnChanges {
     }
     this.subTask='';
     this.data.setSubTask(this.subTaskList);
+    
+    this.subTaskList = this.subTaskList.filter(item=>{
+      return this.editTaskData[0].taskId ==  item.taskId
+    })
   }
 
   deleteSubTask(item){    
@@ -123,7 +146,7 @@ export class EditTodoComponent implements OnInit , OnChanges {
   }
 
   customizeTodo(task_type){
-    debugger;
+    
     this.taskType = task_type;
     this.editTaskData[0].todoType = task_type;
     this.data.setEditData(this.editTaskData);
@@ -135,6 +158,7 @@ export class EditTodoComponent implements OnInit , OnChanges {
 
     })
     this.data.setTodoData(this.todoList)
+    this.todoData.emit(this.todoList);
 
     this.display='none'
   }

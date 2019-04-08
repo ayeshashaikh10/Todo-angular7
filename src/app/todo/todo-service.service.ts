@@ -10,6 +10,7 @@ export class TodoService {
   private todoEditData:any = [];
   private todoSubTask:any=[];
   private taskNote:any=[];
+  private prev_link = '';
 
   setTodoData(data:any){
     this.tododata=data;
@@ -42,6 +43,13 @@ export class TodoService {
 
   getTaskNote():any{
     return this.taskNote;
+  }
+  setPrevLink(data:any){
+    this.prev_link = data;
+  }
+
+  getPrevLink():any{
+    return this.prev_link;
   }
 
 }

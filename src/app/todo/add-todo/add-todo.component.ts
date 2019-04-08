@@ -31,18 +31,22 @@ export class AddTodoComponent implements OnInit, OnChanges {
   todayList=[];
   upcomingList=[];
   showEdit:boolean=false;
-  // editData ={};
+  
   subTask:string;
   subTaskList=[];
+  editTaskList=[];
   personalTodo=[];
   workTodo=[];
-  // editTaskData =[];
+
+  
   todoTypeFilter:string;
 
   @Output() editTaskData = new EventEmitter<any>();
-  // @Output() sendTodoData = new EventEmitter<any>();
+  
+  @Input () todoData =[];
 
   @Input() todoType:string;  
+  
 
   ngOnInit(){
             
@@ -58,7 +62,7 @@ export class AddTodoComponent implements OnInit, OnChanges {
   }
   
   ngOnChanges(){
-    debugger
+    
     this.dataList=this.data.getTodoData();
     if(this.dataList){
       this.todoList = this.dataList;
@@ -148,8 +152,6 @@ export class AddTodoComponent implements OnInit, OnChanges {
     }
   }
 
-  
-
   setTodoList(){
     this.data.setTodoData(this.todoList)
   }
@@ -182,9 +184,12 @@ export class AddTodoComponent implements OnInit, OnChanges {
   editTask(item){    
     
     this.subTaskList =[];
-    this.subTaskList.push(item);    
-    this.data.setEditData(this.subTaskList);
-    this.editTaskData.emit(this.subTaskList);
+    this.editTaskList =[];
+    this.subTaskList = this.data.getSubTask();    
+    // this.subTaskList.push( this.data.getSubTask());
+    this.editTaskList.push(item);    
+    this.data.setEditData(this.editTaskList);
+    this.editTaskData.emit(this.editTaskList);
   }
 
   
