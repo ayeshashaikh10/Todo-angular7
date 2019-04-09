@@ -2,9 +2,6 @@ import { Component, OnInit, OnChanges, ViewContainerRef, ViewChild, TemplateRef,
 import { subTodo } from "../todo";
 import { TodoService} from '../todo-service.service';
 import { NONE_TYPE } from '@angular/compiler/src/output/output_ast';
-// import { TimePickerComponent } from "../../time-picker/time-picker.component"
-
-
 
 @Component({
   selector: 'app-edit-todo',
@@ -23,6 +20,9 @@ export class EditTodoComponent implements OnInit , OnChanges {
   taskNoteObj={
     note:''
   }
+
+  reminderTime='';
+  reminderDisplay='none';
 
   check_true =false;
   taskType='';
@@ -135,6 +135,13 @@ export class EditTodoComponent implements OnInit , OnChanges {
      note:this.note
    });
    this.data.setTaskNote(this.taskNote);
+  }
+  openReminderDialog(){
+    this.reminderDisplay = 'block'
+  }
+
+  closeReminderDialog(){
+    this.reminderDisplay = 'none';
   }
 
   openModalDialog(){

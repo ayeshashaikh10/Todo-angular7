@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoService} from '../todo-service.service';
-import { TimePickerComponent } from "../../time-picker/time-picker.component"
 
 @Component({
   selector: 'app-personal-todo',

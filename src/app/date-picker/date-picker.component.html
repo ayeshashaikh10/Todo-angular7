@@ -1,7 +1,7 @@
 <div class="container">
 
-    <input type="text" #dp="bsDatepicker" bsDatepicker [(bsValue)]="myDateValue">
-    <div class="custom-content" *ngIf="dp.isOpen">
-      <a (click)="customAction()">{{myDateValue | date:'short'}}</a>
-    </div>
+  <input type="text" #dp="bsDatepicker" bsDatepicker [(bsValue)]="myDateValue">
+  <div class="custom-content" *ngIf="dp.isOpen">
+    <a (click)="customAction()">{{myDateValue | date:'short'}}</a>
   </div>
+</div>

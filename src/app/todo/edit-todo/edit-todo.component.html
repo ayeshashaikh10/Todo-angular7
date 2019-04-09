@@ -1,24 +1,24 @@
 
-<!-- <app-time-picker></app-time-picker> -->
+<div class="card" *ngIf="showEditTask">
 
-<div class="card" *ngIf="showEditTask" >
-
-    <!--  -->
+    <!--   -->
     <div class="card-header">
         <h3>{{editTaskData[0].name}}</h3>
     </div>
     <div class="card-body">
       <div class="row">
       <div class="col-lg-6">
-          <button type="button" class="PaneButton">
+          <button type="button" class="PaneButton" (click)="openReminderDialog()">
             <i class="fa fa-clock-o fa-lg"></i><br/>
-              <span>Add Reminder</span>
+              <span *ngIf="reminderTime == ''">Add Reminder</span>
+              <h6 class="fontColor">{{this.reminderTime | date:'shortTime'}}</h6>
           </button>
+
       </div>        
       <div class="col-lg-6">
           <button type="button" class="PaneButton" (click)="openModalDialog()">
             <i class="fa fa-list fa-lg"></i><br/>
-              <span>{{this.todoType | uppercase}}</span>
+              <span class="fontColor">{{this.todoType | titlecase}}</span>
           </button>
       </div>        
     </div>
@@ -111,6 +111,25 @@
                 </div>
               </li>
             </ul>
+          </div>
+          <!-- <div class="modal-footer">
+            <button class="btn btn-light">close</button>
+          </div> -->
+        </div>
+      </div>
+    </div>
+
+    <div id="modalReminder" class="modal " tabindex="-1" role="dialog"  [ngStyle]="{'display':reminderDisplay}">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4>Add Reminder</h4>
+            <button type="button" class="close" aria-label="Close" (click)="closeReminderDialog()">
+              <span><i class="fa fa-times"></i></span></button>
+              <br/>
+          </div>
+          <div class="modal-body">
+            <igx-time-picker [(ngModel)]="reminderTime"></igx-time-picker>
           </div>
           <!-- <div class="modal-footer">
             <button class="btn btn-light">close</button>
