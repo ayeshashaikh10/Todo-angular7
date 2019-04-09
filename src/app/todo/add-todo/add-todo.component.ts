@@ -110,6 +110,7 @@ export class AddTodoComponent implements OnInit, OnChanges {
     }
 
     this.todoItem.name='';
+    this.taskDate='';
     this.setTodoList();
 
 //     this.sendTodoData.emit(this.todoList);

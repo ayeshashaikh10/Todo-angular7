@@ -83,6 +83,8 @@ export class EditTodoComponent implements OnInit , OnChanges {
         this.showEditTask = false;
         this.data.setPrevLink(this.todoType)
       }
+      
+      this.reminderTime = this.editTaskData[0].taskReminder
     }
   }
 
@@ -141,7 +143,16 @@ export class EditTodoComponent implements OnInit , OnChanges {
   }
 
   closeReminderDialog(){
+    
     this.reminderDisplay = 'none';
+    if(this.reminderTime != ''){
+      this.editTaskData = this.editTaskData.map(item=>{
+        item.taskReminder = this.reminderTime
+        return item
+      })
+      this.data.setEditData(this.editTaskData)
+    }
+    
   }
 
   openModalDialog(){
@@ -152,9 +163,8 @@ export class EditTodoComponent implements OnInit , OnChanges {
     this.display='none'
   }
 
-  customizeTodo(task_type){
+  customizeTodo(task_type){    
     
-    this.taskType = task_type;
     this.editTaskData[0].todoType = task_type;
     this.data.setEditData(this.editTaskData);
     this.todoList = this.todoList.map(item =>{
@@ -166,8 +176,11 @@ export class EditTodoComponent implements OnInit , OnChanges {
     })
     this.data.setTodoData(this.todoList)
     this.todoData.emit(this.todoList);
-
     this.display='none'
+    if(this.taskType != task_type){
+      this.showEditTask = false
+    }
+    this.taskType = task_type;
   }
 
   clearData(){

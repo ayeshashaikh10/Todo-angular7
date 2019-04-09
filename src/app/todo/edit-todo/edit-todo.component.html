@@ -10,7 +10,7 @@
       <div class="col-lg-6">
           <button type="button" class="PaneButton" (click)="openReminderDialog()">
             <i class="fa fa-clock-o fa-lg"></i><br/>
-              <span *ngIf="reminderTime == ''">Add Reminder</span>
+              <span *ngIf="(reminderTime == '' || reminderTime == undefined)">Add Reminder</span>
               <h6 class="fontColor">{{this.reminderTime | date:'shortTime'}}</h6>
           </button>
 
