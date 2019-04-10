@@ -171,9 +171,9 @@ export class EditTodoComponent implements OnInit , OnChanges {
       if(item.taskId == this.editTaskData[0].taskId ){
          item.todoType = task_type
       }
-      return item
+      return item;
 
-    })
+    });
     this.data.setTodoData(this.todoList)
     this.todoData.emit(this.todoList);
     this.display='none'

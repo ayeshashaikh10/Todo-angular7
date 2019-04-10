@@ -12,6 +12,7 @@ import { PersonalTodoComponent } from './personal-todo/personal-todo.component';
 import { WorkTodoComponent } from './work-todo/work-todo.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IgxTimePickerModule } from 'igniteui-angular';
+import { GroceryComponent } from './grocery/grocery.component';
 @NgModule({
     declarations: [
         TodoListComponent,
@@ -20,6 +21,7 @@ import { IgxTimePickerModule } from 'igniteui-angular';
         AddTodoComponent,
         PersonalTodoComponent,
         WorkTodoComponent,
+        GroceryComponent,
     ],
     imports: [
         CommonModule,

@@ -62,7 +62,7 @@ export class AddTodoComponent implements OnInit, OnChanges {
   }
   
   ngOnChanges(){
-    
+    debugger;
     this.dataList=this.data.getTodoData();
     if(this.dataList){
       this.todoList = this.dataList;
@@ -162,9 +162,11 @@ export class AddTodoComponent implements OnInit, OnChanges {
   }
 
   scheduleTodo(){
-    if(this.todoType=="personal")
-    {
+    if(this.todoType=="personal"){
       this.todoTypeFilter = "personal"
+    }
+    else if(this.todoType == "grocery"){
+      this.todoTypeFilter = "grocery";
     }
     else{
       this.todoTypeFilter = "work"

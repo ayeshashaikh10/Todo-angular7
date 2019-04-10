@@ -2,16 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { TodoService} from '../todo-service.service';
 
 @Component({
-  selector: 'app-work-todo',
-  templateUrl: './work-todo.component.html',
-  styleUrls: ['./work-todo.component.scss']
+  selector: 'app-grocery',
+  templateUrl: './grocery.component.html',
+  styleUrls: ['./grocery.component.scss']
 })
-export class WorkTodoComponent implements OnInit {
+export class GroceryComponent implements OnInit {
   constructor(private data:TodoService ){}
   editTaskData=[];
-  todoType="work";
-  todoData=[];
-
+  todoType="grocery";
+  todoData =[];
   ngOnInit(){
         
   } 
@@ -25,6 +24,7 @@ export class WorkTodoComponent implements OnInit {
     this.editTaskData = this.data.getEditData();
     
   }
+  
   sendUpdatedData($event){
     this.todoData = $event;
     // this.todoData = this.get

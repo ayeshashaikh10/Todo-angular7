@@ -7,6 +7,7 @@ import { HomeComponent } from '../home/home.component';
 import { EditTodoComponent} from "../todo/edit-todo/edit-todo.component";
 import { PersonalTodoComponent } from "../todo/personal-todo/personal-todo.component";
 import { WorkTodoComponent } from "../todo/work-todo/work-todo.component";
+import { GroceryComponent } from "../todo/grocery/grocery.component";
 
 
 // const route: Routes=[]
@@ -31,6 +32,10 @@ const route: Routes=[
   {
     path:'workTodo',
     component: WorkTodoComponent
+  },
+  {
+    path:'todoGrocery',
+    component: GroceryComponent
   }
 ]
 
