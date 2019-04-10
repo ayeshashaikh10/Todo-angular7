@@ -1,4 +1,4 @@
-
+@import "../../app.component.scss";
 // @import '../add-todo/add-todo.component.scss';
 
 i{
@@ -9,9 +9,7 @@ i{
     text-decoration: line-through;
     color: grey;
 }
-.fa-remove{
-    color: red;
-}
+
 
 .done-true{
     text-decoration: line-through;

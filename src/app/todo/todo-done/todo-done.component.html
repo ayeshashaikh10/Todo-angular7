@@ -7,15 +7,26 @@
         <div class="card-header">
             <h4 >To Do Done</h4>
         </div>
+        <br/>
         <div class="card-body" *ngIf="this.todoDone.length; else todoDoneMsg"> 
           <ul class="list-group"  >
-            <li class="list-group-item" *ngFor='let item of todoDone'>            
-              <label> <i class="fa fa-check"></i>{{item.name}} </label>                
+            <li class="list-group-item" *ngFor='let item of todoDone'>    
+              <div class="row">
+                <div class="col-lg-8">
+                  <label> <i class="fa fa-check"></i>{{item.name}} </label>                                  
+                </div>
+                <div class="col-lg-4">
+                  <span mdbTooltip="Delete Task"><i class="fa fa-remove fa-lg" aria-hidden="true" (click)='deleteTodo(item)'></i></span>                  
+                </div>
+              </div>        
             </li>
           </ul>
+          <div>
+            <!-- <button (click)="deleteTodo()"></button> -->
+          </div>
         </div>
         <ng-template #todoDoneMsg>
-          <label>No tasks are done</label>
+          <p>No tasks are done</p>
         </ng-template>
         <!-- <div class="card-footer"> 
           <button class="btn btn-primary" (click)='deleteAllDone()'>Delete All</button>

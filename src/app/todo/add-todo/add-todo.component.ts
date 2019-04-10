@@ -62,7 +62,8 @@ export class AddTodoComponent implements OnInit, OnChanges {
   }
   
   ngOnChanges(){
-    debugger;
+    this.todoDone = this.data.getTodoDoneData();
+    
     this.dataList=this.data.getTodoData();
     if(this.dataList){
       this.todoList = this.dataList;
@@ -178,10 +179,7 @@ export class AddTodoComponent implements OnInit, OnChanges {
 
     this.upcomingList = this.todoList.filter(item=>{
       return (item.todoType == this.todoTypeFilter && item.taskDate > this.todayDate);        
-    });
-
-
-    
+    });  
   } 
   
   editTask(item){    
