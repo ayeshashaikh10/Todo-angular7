@@ -9,8 +9,9 @@ import { TodoService} from '../todo-service.service';
 export class WorkTodoComponent implements OnInit {
   constructor(private data:TodoService ){}
   editTaskData=[];
-  todoType="work";
   todoData=[];
+  todoType="work";
+
 
   ngOnInit(){
         
@@ -21,13 +22,10 @@ export class WorkTodoComponent implements OnInit {
   }
 
   receiveSubTask($event){        
-    this.editTaskData=$event;
-    this.editTaskData = this.data.getEditData();
-    
-  }
-  sendUpdatedData($event){
-    this.todoData = $event;
-    // this.todoData = this.get
+    this.editTaskData=$event;   
   }
 
+  sendtodoData($event){        
+    this.todoData=$event;
+  }
 }

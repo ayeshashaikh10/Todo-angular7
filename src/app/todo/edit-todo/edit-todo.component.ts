@@ -22,6 +22,7 @@ export class EditTodoComponent implements OnInit , OnChanges {
   }
 
   reminderTime='';
+  reminderDate:any = new Date();
   reminderDisplay='none';
 
   check_true =false;
@@ -30,11 +31,13 @@ export class EditTodoComponent implements OnInit , OnChanges {
 
   @Input () editTaskData =[];
   @Input() todoType:string;  
-
   @Output() todoData = new EventEmitter<any>();
+
+  
 
   prev_link= '';
   showEditTask = false;
+  disableSubTask=false;
   
   subTaskItem: subTodo={
     subTaskId :0,
@@ -48,16 +51,25 @@ export class EditTodoComponent implements OnInit , OnChanges {
   constructor(private data:TodoService ){}
 
   ngOnInit() {
+    
     this.taskType= this.todoType;
     this.todoList = this.data.getTodoData();    
   }
 
-  ngOnChanges(){ 
-  
+  ngOnChanges(){     
+    debugger;
     this.todoList = this.data.getTodoData();  
-    this.subTaskData=this.data.getSubTask();
-    this.editTaskData = this.data.getEditData();
+    if(this.todoList.length){
+      this.todoList = this.todoList.map(item=>{
+        if(item.taskId == this.editTaskData[0].taskId){          
+            this.disableSubTask = item.done          
+        }
+        return item;
+      })
+    }
 
+    this.subTaskData=this.data.getSubTask();
+    
     if(this.subTaskData){
       this.subTaskList = this.subTaskData;
     }
@@ -76,20 +88,25 @@ export class EditTodoComponent implements OnInit , OnChanges {
     
     if(this.editTaskData.length){
       this.prev_link = this.data.getPrevLink();
-      if(this.prev_link == this.todoType){
-        this.showEditTask = true;
-      }
-      else{
-        this.showEditTask = false;
-        this.data.setPrevLink(this.todoType)
-      }
+      this.showEditTask = true;
+
+      // if(this.prev_link == this.todoType){
+      //   this.showEditTask = true;
+      // }
+      // else{
+      //   this.showEditTask = false;
+      //   this.data.setPrevLink(this.todoType)
+      // }
       
       this.reminderTime = this.editTaskData[0].taskReminder
+      this.reminderDate = new Date(this.editTaskData[0].taskDate);
+    }
+    else{
+      this.showEditTask = false;
     }
   }
 
-  addSubTask(){ 
-    
+  addSubTask(){     
     this.subTaskList = this.data.getSubTask();
 
     if(this.subTaskList.length == 0){
@@ -143,16 +160,31 @@ export class EditTodoComponent implements OnInit , OnChanges {
   }
 
   closeReminderDialog(){
-    
     this.reminderDisplay = 'none';
-    if(this.reminderTime != ''){
-      this.editTaskData = this.editTaskData.map(item=>{
-        item.taskReminder = this.reminderTime
-        return item
-      })
-      this.data.setEditData(this.editTaskData)
-    }
+    // if(this.reminderTime != ''){
+    //   this.editTaskData = this.editTaskData.map(item=>{
+    //     item.taskReminder = this.reminderTime
+    //     return item
+    //   })
+    //   this.data.setEditData(this.editTaskData)
+      
+    // }
     
+    this.editTaskData = this.editTaskData.map(item=>{
+      item.taskReminder = this.reminderTime
+      item.taskDate = this.reminderDate.setHours(0,0,0,0)
+      return item
+    })
+    this.todoList = this.todoList.map(item=>{
+      if(item.taskId == this.editTaskData[0].taskId){
+      item.taskReminder = this.reminderTime
+      item.taskDate = this.reminderDate.setHours(0,0,0,0)
+      }
+      return item
+    })
+    this.data.setEditData(this.editTaskData)
+    this.data.setTodoData(this.todoList)
+    this.todoData.emit(this.todoList)
   }
 
   openModalDialog(){
@@ -163,8 +195,8 @@ export class EditTodoComponent implements OnInit , OnChanges {
     this.display='none'
   }
 
-  customizeTodo(task_type){    
-    
+  customizeTodo(task_type){        
+    debugger;
     this.editTaskData[0].todoType = task_type;
     this.data.setEditData(this.editTaskData);
     this.todoList = this.todoList.map(item =>{
@@ -174,13 +206,16 @@ export class EditTodoComponent implements OnInit , OnChanges {
       return item;
 
     });
-    this.data.setTodoData(this.todoList)
     this.todoData.emit(this.todoList);
+
+    this.data.setTodoData(this.todoList)
     this.display='none'
-    if(this.taskType != task_type){
-      this.showEditTask = false
-    }
+    // if(this.taskType != task_type){
+    //   this.showEditTask = false
+    // }
     this.taskType = task_type;
+    this.editTaskData = this.todoList[0];
+    this.todoData.emit(this.editTaskData)    
   }
 
   clearData(){

@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class DatePickerComponent implements OnInit {
 
   myDateValue: Date;
+  
+  public dateTime3: Date;
 
   ngOnInit() {
     this.myDateValue = new Date();

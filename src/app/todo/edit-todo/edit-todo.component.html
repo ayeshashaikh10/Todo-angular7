@@ -1,73 +1,76 @@
 
-<div class="card" *ngIf="showEditTask">
-
-    <!--   -->
-    <div class="card-header">
-        <h3>{{editTaskData[0].name}}</h3>
-    </div>
+<div class="card divSubTask" [ngClass]="this.disableSubTask?'subTaskCardDisable':''" 
+  *ngIf="showEditTask; else showImage">
     <div class="card-body">
+        <h3>{{editTaskData[0].name}}</h3>
+
       <div class="row">
-      <div class="col-lg-6">
-          <button type="button" class="PaneButton" (click)="openReminderDialog()">
+        <div class="col-lg-6">
+          <button type="button" class="PaneButton" (click)="!this.disableSubTask?openReminderDialog():return" [ngClass]="this.disableSubTask?'subTaskCardDisable':''">
             <i class="fa fa-clock-o fa-lg"></i><br/>
               <span *ngIf="(reminderTime == '' || reminderTime == undefined)">Add Reminder</span>
               <h6 class="fontColor">{{this.reminderTime | date:'shortTime'}}</h6>
           </button>
-
       </div>        
       <div class="col-lg-6">
-          <button type="button" class="PaneButton" (click)="openModalDialog()">
+          <button type="button" class="PaneButton" (click)="!this.disableSubTask?openModalDialog():return" [ngClass]="this.disableSubTask?'subTaskCardDisable':''">
             <i class="fa fa-list fa-lg"></i><br/>
               <span class="fontColor">{{this.todoType | titlecase}}</span>
           </button>
       </div>        
     </div>
-    <br/> 
-    
-    <hr>
-      
+    <br/>     
+    <hr>      
     <div class="row">          
         <div class="col-lg-10">
           <label>Sub Tasks</label>
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-12">
-          <input type="text" class="form-control"  placeholder="Add sub task" 
-            [(ngModel)]="subTask" (change)="addSubTask()" (focusout) = "clearData()">
-        </div>
-        <!-- <div class="col-lg-2">
-          <span id="btnAdd" (click)="addSubTask()" mdbTooltip="Add Task">
-            <i  class="fa fa-plus-circle fa-lg"></i>
-          </span>
-        </div> -->
-      </div>
+      <div class="col-lg-12">
+        <input type="text" class="form-control"  placeholder="Add sub task" [disabled]="this.disableSubTask?true:false"
+          [(ngModel)]="subTask" (change)="addSubTask()" (focusout) = "clearData()">
+      </div>       
+    </div>
     <div >
       <br/>
       <ul class="list-group">
-        <li class="list-group-item" *ngFor="let item of subTaskList">
-          <div class="row">
-            <div class="col-lg-10">
-              <!-- <span>{{item.subTaskName}}</span> -->
-              <div class="form-check">
+        <li  *ngFor="let item of subTaskList">
+          <!-- <div class="row"> -->
+            <!-- <div class="col-lg-10">               -->
+              <!-- <div class="form-check">
                 <input type="checkbox" class="form-check-input" id="todoCheck_{{item.id}}"
                   [(ngModel)]='item.subTaskDone' mdbInputDirective  />
-                <label class="form-check-label done-{{item.subTaskDone}}" >{{item.subTaskName}}</label>
-              </div>
-            </div>
-            <div class="cl-lg-2">
-                <span mdbTooltip="Delete Task"><i class="fa fa-remove fa-lg" aria-hidden="true" (click)='deleteSubTask(item)'></i></span>                
-            </div>
+                <input class="txtSubTask form-control done-{{item.subTaskDone}}" [(ngModel)] = "item.subTaskName" />
+                <br> 
+              </div> -->
+
+              <div class="input-group mb-3 listPane">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <input type="checkbox" aria-label="Checkbox for following text input" id="todoCheck_{{item.id}}"
+                    [(ngModel)]='item.subTaskDone'  >
+                    
+                  </div>
+                </div>
+                <input type="text" class="txtSubTask form-control done-{{item.subTaskDone}}" 
+                aria-label="Text input with checkbox" [(ngModel)] = "item.subTaskName">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span mdbTooltip="Delete Task"><i class="fa fa-remove fa-lg" aria-hidden="true" (click)='deleteSubTask(item)'></i></span>                                   
+                  </div>
+                </div>
+            
           </div>                  
         </li>
       </ul>
-    </div>
-    <!-- <br/> -->
+    </div>    
     <div >
       <label>Notes</label>
     </div>
     <div>
-      <input type="text" class="form-control" placeholder="Add your notes here" [(ngModel)]="note" (change)="addNotes()">
+      <input type="text" class="form-control" placeholder="Add your notes here" [disabled]="this.disableSubTask?true:false"
+      [(ngModel)]="note" (change)="addNotes()">
     </div>
     <div class="modal"  tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
       <div class="modal-dialog" role="document">
@@ -111,10 +114,7 @@
                 </div>
               </li>
             </ul>
-          </div>
-          <!-- <div class="modal-footer">
-            <button class="btn btn-light">close</button>
-          </div> -->
+          </div>          
         </div>
       </div>
     </div>
@@ -125,38 +125,26 @@
           <div class="modal-header">
             <h4>Add Reminder</h4>
             <button type="button" class="close" aria-label="Close" (click)="closeReminderDialog()">
-              <span><i class="fa fa-times"></i></span></button>
-              <br/>
+              <span><i class="fa fa-times"></i></span>
+            </button>
+            <br/>
           </div>
           <div class="modal-body">
-            <igx-time-picker [(ngModel)]="reminderTime"></igx-time-picker>
-          </div>
-          <!-- <div class="modal-footer">
-            <button class="btn btn-light">close</button>
-          </div> -->
+            <div class="row">
+              <div class="col-lg-6">           
+                <igx-date-picker [(ngModel)]="reminderDate"></igx-date-picker>
+              </div>
+              <div class="col-lg-6">                 
+                <igx-time-picker [(ngModel)]="reminderTime"></igx-time-picker>
+              </div>                            
+            </div>
+          </div>        
         </div>
       </div>
-    </div>
-    
-    <!-- <ng-template #content let-modal>
-          <div class="modal-header">
-            <h4 class="modal-title">Modal title</h4>
-            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <p>One fine body&hellip;</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
-          </div>
-        </ng-template> -->
-    <!-- <ng-template #template>
-      <input type="text" class="form-control"  placeholder="Add sub task" (focus) = "insertView($event)">
-      <br/>
-    </ng-template>            
-    <ng-container *ngTemplateOutlet="template"></ng-container>
-    <ng-container #viewContainer></ng-container> -->
+    </div>    
     </div>
   </div>
+
+  <ng-template #showImage>
+    <img src="../../../assets/images/Todo.PNG" class="todoLogo">
+  </ng-template>

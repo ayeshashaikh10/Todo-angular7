@@ -18,8 +18,7 @@ export class TodoDoneComponent implements OnInit {
     }
   }
 
-  deleteTodo(item){  
-    debugger;    
+  deleteTodo(item){      
     this.todoDone = this.todoDone.filter(val=>{
       return val.taskId != item.taskId
     });

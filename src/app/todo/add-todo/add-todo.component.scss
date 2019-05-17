@@ -28,3 +28,81 @@ i{
 ul{
     list-style-type: none;
 }
+
+.badge-light{
+    background-color: #9197a3 !important;
+    color: #fff !important;
+}
+
+#title{
+    border-radius: 1rem !important;
+}
+.fa-arrow-circle-o-up{
+    color:#007bff;    
+}
+
+.fa-arrow-circle-up-disabled{
+    color: grey
+}
+
+.fa-arrow-circle-up-disabled:hover{
+    color: #007bff;
+    cursor: pointer;
+}
+
+.btnAddTodo{
+    background-color: transparent;
+    border: none;   
+    cursor: pointer; 
+}
+
+.divAddTodo{
+    display: inline-flex;
+}
+
+.headingParent:hover{
+    color: blue !important;
+    cursor: pointer;   
+    // box-shadow: 2px 2px 2px 2px #9197a3;
+    // border: solid thin #9197a3;
+    // border-radius: 10px;
+
+    
+}
+.headingParent a:hover{
+    text-decoration: underline;
+
+}
+
+.txtSubTask, .input-group-text{
+    border: none;
+    background-color: transparent;
+}
+.divReminderTime{
+
+    border: 1px solid ;
+}
+
+.listPane{
+    border: thin solid lightgrey;
+    border-radius: 5px;
+    box-shadow: 0 0 6px 0 lightgrey;
+}
+.listPane:hover{    
+    border-color: #0da5f3;    
+}
+
+.reminderBadge{
+    // background-color: #9197a3;
+    border: #9197a3 solid thin;
+    color: #000000 !important;
+    border-radius: 10px;
+    padding: 0 3px 0 3px;
+    font-size: x-small
+}
+
+.divTodoList{
+    overflow-y: auto;
+    overflow-x: hidden; 
+    height: 450px;
+}

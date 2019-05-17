@@ -6,29 +6,17 @@ import { TodoService} from '../todo-service.service';
   templateUrl: './personal-todo.component.html',
   styleUrls: ['./personal-todo.component.scss']
 })
-export class PersonalTodoComponent implements OnInit {
+export class PersonalTodoComponent {
   constructor(private data:TodoService ){}
   editTaskData=[];
+  todoData =[];
   todoType="personal"
-  todoData=[];
-  ngOnInit(){
-        
-  } 
-
-  ngOnChanges(){
-    // this.subTaskList = this.data.getEditData();
-  }
-
+    
   receiveSubTask($event){        
     this.editTaskData=$event;
-    this.editTaskData = this.data.getEditData();
-    
   }
 
-  sendUpdatedData($event){
-    this.todoData = $event;
-    // this.todoData = this.get
+  sendtodoData($event){        
+    this.todoData=$event;
   }
-
-
 }

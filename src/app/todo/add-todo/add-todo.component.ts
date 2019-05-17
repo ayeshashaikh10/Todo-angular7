@@ -1,7 +1,10 @@
-import { Component, OnInit, OnChanges, ViewContainerRef, ViewChild, TemplateRef, EventEmitter, Output, Input } from '@angular/core';
+import { Component, OnInit, OnChanges, ViewChildren, EventEmitter, Output, Input } from '@angular/core';
+import { CollapseComponent} from 'angular-bootstrap-md';
+
 import { Todo } from "../todo";
 import { TodoService} from '../todo-service.service';
-import { TodoListComponent } from '../todo-list/todo-list.component';
+import { CollapseDirective } from 'ngx-bootstrap';
+
 
 @Component({
   selector: 'app-add-todo',
@@ -9,6 +12,18 @@ import { TodoListComponent } from '../todo-list/todo-list.component';
   styleUrls: ['./add-todo.component.scss']
 })
 export class AddTodoComponent implements OnInit, OnChanges {
+
+
+  @ViewChildren(CollapseComponent) collapses: CollapseComponent[];
+
+  
+  ngAfterViewInit() {    
+      // this.collapses.forEach((collapse: CollapseComponent) => {
+      //   collapse.toggle();
+      // });
+      this.collapses.forEach(collapse =>collapse.toggle());
+
+  }
 
   constructor(private data:TodoService ){}
 
@@ -37,19 +52,17 @@ export class AddTodoComponent implements OnInit, OnChanges {
   editTaskList=[];
   personalTodo=[];
   workTodo=[];
-
-  
   todoTypeFilter:string;
+  isDisabled=true;
 
   @Output() editTaskData = new EventEmitter<any>();
-  
+  @Input() todoType:string;  
   @Input () todoData =[];
 
-  @Input() todoType:string;  
   
 
   ngOnInit(){
-            
+    
     this.dataList=this.data.getTodoData();
     if(this.dataList){
       this.todoList = this.dataList;
@@ -62,6 +75,8 @@ export class AddTodoComponent implements OnInit, OnChanges {
   }
   
   ngOnChanges(){
+    
+    this.isDisabled = this.todoItem.name ? false:true;
     this.todoDone = this.data.getTodoDoneData();
     
     this.dataList=this.data.getTodoData();
@@ -86,13 +101,14 @@ export class AddTodoComponent implements OnInit, OnChanges {
   }
 
   addTodoList(item){        
+    
     if(this.todoList.length == 0){
       this.todoList= [
         {
           taskId:this.incrementId + 1,
           name:item,
           done:false,
-          taskDate:this.taskDate.setHours(0,0,0,0),
+          taskDate:this.todayDate,
           todoType:this.todoType
         }
       ];      
@@ -104,7 +120,7 @@ export class AddTodoComponent implements OnInit, OnChanges {
         {
           taskId:this.incrementId,
           name:item,done:false,     
-          taskDate:this.taskDate.setHours(0,0,0,0),
+          taskDate:this.todayDate,
           todoType:this.todoType
         }
       )
@@ -117,6 +133,7 @@ export class AddTodoComponent implements OnInit, OnChanges {
 //     this.sendTodoData.emit(this.todoList);
 
    this.scheduleTodo();     
+   this.editTask(this.todoList[this.todoList.length-1]);
   }
 
   addTodoDone(item){
@@ -130,12 +147,14 @@ export class AddTodoComponent implements OnInit, OnChanges {
   }
 
   deleteTodo(item){  
+    debugger;
     this.todoList = this.todoList.filter(val=>{
       return val.taskId != item.taskId
     });
 
     this.setTodoList();
     this.scheduleTodo();
+    this.editTask(this.todoList[0])
   }
   
   deleteAll(event){
@@ -183,17 +202,17 @@ export class AddTodoComponent implements OnInit, OnChanges {
   } 
   
   editTask(item){    
-    
+     
     this.subTaskList =[];
     this.editTaskList =[];
-    this.subTaskList = this.data.getSubTask();    
-    // this.subTaskList.push( this.data.getSubTask());
-    this.editTaskList.push(item);    
-    this.data.setEditData(this.editTaskList);
+    if(item!=undefined){
+      this.subTaskList = this.data.getSubTask();    
+      this.editTaskList.push(item);    
+    }
     this.editTaskData.emit(this.editTaskList);
+    this.data.setEditData(this.editTaskList);
   }
 
-  
   
   // @ViewChild('viewContainer', {read: ViewContainerRef}) viewContainer: ViewContainerRef;
   // @ViewChild('template') template: TemplateRef<any>;

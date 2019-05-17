@@ -2,8 +2,7 @@
 <div class="container-fluid" >
   <div class="row">
     <div class="col-lg-6">    
-      <div class="card"  >
-          <!-- *ngIf="this.todoData.length" -->
+      <div class="card"  >          
         <div class="card-header">
             <h4 >To Do Done</h4>
         </div>
@@ -20,21 +19,14 @@
                 </div>
               </div>        
             </li>
-          </ul>
-          <div>
-            <!-- <button (click)="deleteTodo()"></button> -->
-          </div>
+          </ul>          
         </div>
         <ng-template #todoDoneMsg>
           <p>No tasks are done</p>
         </ng-template>
-        <!-- <div class="card-footer"> 
-          <button class="btn btn-primary" (click)='deleteAllDone()'>Delete All</button>
-        </div> -->
+       
       </div>
-      <!-- <div *ngIf="this.todoData.length==0">
-        <p>No tasks available</p>
-      </div> -->
+      
     </div>
   </div>
 </div>

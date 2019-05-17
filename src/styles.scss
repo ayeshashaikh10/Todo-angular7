@@ -2,3 +2,25 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@import '~igniteui-angular/lib/core/styles/themes/index';
+
+@include igx-core();
+@include igx-theme($default-palette);
+
+
+body{
+  background: rgba(0, 0, 0, 0.03) !important
+}
+.lblCardHeading{
+  font-weight: bold
+}
+.card{
+  min-height: 500px;
+}
+$date-picker-theme: igx-calendar-theme(
+  $header-background: red ,
+  $content-background: black
+);
+
+@include igx-calendar($date-picker-theme);

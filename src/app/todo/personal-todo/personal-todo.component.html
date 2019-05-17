@@ -2,12 +2,12 @@
 <div class="container" >
     <div class="row">
         <div class="col-lg-6">
-            <app-add-todo (editTaskData) = "receiveSubTask($event)" [todoType]="todoType" [todoData]="todoData"></app-add-todo>
+            <app-add-todo (editTaskData) = "receiveSubTask($event)" [todoType]="todoType" 
+            [todoData] = "todoData"></app-add-todo>
         </div>
-        <div class="col-lg-6" >
-            <!-- *ngIf = "showEdit" -->
+        <div class="col-lg-6" >            
             <app-edit-todo [editTaskData]="editTaskData" [todoType]="todoType" 
-              (todoData)="sendUpdatedData($event)"  ></app-edit-todo>        
+            (todoData) = "sendtodoData($event)"></app-edit-todo>        
         </div>
     </div>
   </div>

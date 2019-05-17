@@ -1,4 +1,6 @@
 @import "../add-todo/add-todo.component.scss";
+
+
 :card-bg-color{
     --card-bg-color:#fff;
 }
@@ -40,4 +42,39 @@
 
 .fontColor{
     color: blue;
+}
+
+.txtSubTask, .input-group-text{
+    border: none;
+    background-color: transparent;
+
+}
+.txtSubTask:focus{
+    border: transparent !important;
+    outline: none !important;    
+}
+
+
+.listPane{
+    border: thin solid lightgrey;
+    border-radius: 5px;
+    box-shadow: 0 0 6px 0 lightgrey;
+}
+.listPane:hover{    
+    border-color: #0da5f3;    
+}
+
+.subTaskCardDisable{
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+.todoLogo{
+    height: 500px;
+    width: 500px;
+    margin: 10%;
+    
+}
+
+.divSubTask{
+    margin-top: 9%;
 }
